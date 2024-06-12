@@ -174,7 +174,9 @@ class Chat:
         
         return wav
     
-    def sample_random_speaker(self, ):
+    def sample_random_speaker(self, seed=-1):
+        if seed != -1:
+            torch.manual_seed(seed)
         
         dim = self.pretrain_models['gpt'].gpt.layers[0].mlp.gate_proj.in_features
         std, mean = self.pretrain_models['spk_stat'].chunk(2)
